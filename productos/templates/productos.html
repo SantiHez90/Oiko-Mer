@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    <style>
+
+        h1{
+            text-align: center;
+        }
+
+        .container{
+            display: flex;
+        }
+        img{
+            width: 300px;
+        }
+    </style>
+</head>
+   <!--Categorias-->
+<h1>Lista de Categorías</h1>
+    <div class="container">
+
+        {% for categoria in categorias_list %}
+
+            <div class="productos">
+        
+                <h2>{{ categoria.nomCategoria }}</h2>
+                <img src="{{ categoria.imagen }}" alt="Imagen de la categoría">
+                
+            </div>
+        {% endfor %}
+    </div>
+        
+
+
+{% endblock %}

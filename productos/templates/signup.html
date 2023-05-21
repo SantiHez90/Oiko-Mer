@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form id="form1" runat="server" method="post">
+      {% csrf_token %}
+      <div>
+          <section class="vh-80 gradient-custom">
+                <div class="container py-5">
+                  <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-5">
+                      <div class="card bg-ligth text-white" style="border-radius: 1rem;  ">
+                        <div class="card-body p-5 text-center" style="height: 58rem;">
+                          <div class="text-center">
+                            <!--<img src="/img/logo1.png" alt="Logo" width="350" class="d-inline-block align-text-top" style="width: 185px;" alt="logo"> </style> -->
+                          </div>
+                          <div class="mb-md-5 mt-md-4 pb-5">
+
+                            <h2 class="fw-bold mb-2 text-uppercase text-dark">Registrate</h2>
+                            <p class="text-black-100 mb-5 text-muted">Ingrese sus datos y una contraseña!</p>
+
+                            <div class="form-outline form-white mb-1">
+                              <label class="text-black-100 mb-8 text-muted">Usuario</label>
+                              <input type="text" name="username" id="username" class="form-control form-control-lg text-muted" placeholder="Crea un nuevo usuario" required>
+                              <br>
+                            </div>
+
+                            <div class="form-outline form-white mb-1">
+                              <label class="text-black-100 mb-8 text-muted">Primer Nombre</label>
+                              <input type="text" name="fname" id="fname" class="form-control form-control-lg text-muted" placeholder="Ingresa tu primer nombre" required>
+                              <br>
+                            </div>
+
+                            <div class="form-outline form-white mb-1">
+                              <label class="text-black-100 mb-8 text-muted">Primer Apellido</label>
+                              <input type="text" name="lname" id="lname" class="form-control form-control-lg text-muted" placeholder="Ingresa tu apellido" required>
+                              <br>
+                            </div>
+
+                            <div class="form-outline form-white mb-1">
+                              <label class="text-black-100 mb-8 text-muted">Correo Electronico</label>
+                              <input type="email" name="email" id="email" class="form-control form-control-lg text-muted" placeholder="Ingresa tu correo electronico" required>
+                              <br>
+                            </div>
+
+                            <div class="form-outline form-white mb-1">
+                              <label class="text-black-100 mb-8 text-muted">Contraseña</label>
+                              <input type="password" name="pass1" id="pass1" class="form-control form-control-lg text-muted" placeholder="Crea una contraseña" required>
+                              <br>
+                            </div>
+
+                            <div class="form-outline form-white mb-1">
+                              <label class="text-black-100 mb-8 text-muted">Confirmar Contraseña</label>
+                              <input type="password" name="pass2" id="pass2" class="form-control form-control-lg text-muted" placeholder="Confirma tu contraseña" required>
+                              <br>
+                            </div>
+
+
+
+                              <button class="btn btn-primary btn-lg text-white px-5" type="submit">Registrarse</button>
+                          <div>
+                            <br>
+                            <p class="mb-0 text-muted" >Ya tienes una cuenta? <a href="/signin" class="text-dark-50 fw-bold">Inicia Sesion</a>
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </section>
+      </div>
+  </form>
+
+{% endblock %}
