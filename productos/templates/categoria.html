@@ -4,7 +4,7 @@
 <head>
     <style>
 
-        h1{
+        h1,h2{
             text-align: center;
         }
 
@@ -13,7 +13,10 @@
         }
         img{
             width: 300px;
+            
         }
+
+
     </style>
 </head>
    <!--Categorias-->
@@ -21,12 +24,11 @@
     <div class="container">
 
         {% for categoria in categorias_list %}
-
             <div class="productos">
-        
                 <h2>{{ categoria.nomCategoria }}</h2>
-                <img src="{{ categoria.imagen }}" alt="Imagen de la categoría">
-                
+                <a href="{% url 'categoria_intermedia' categoria.id %}">
+                 <img src="{{ categoria.imagen }}" alt="Imagen de la categoría">
+                </a>
             </div>
         {% endfor %}
     </div>

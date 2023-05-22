@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for producto in productos_list %}
+<div class="producto">
+    <h3>{{ producto.nomProducto }}</h3>
+    <p>Marca: {{ producto.nomMarca }}</p>
+    <p>Precio: {{ producto.intprecio }}</p>
+    <a href="#">
+        <img src="{{ producto.foto }}" alt="Imagen del producto">
+    </a>
+</div>
+{% empty %}
+<p>No hay productos disponibles para esta categoría intermedia.</p>
+{% endfor %}
+
+{% endblock %}

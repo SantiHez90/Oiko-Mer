@@ -25,5 +25,7 @@ urlpatterns = [
     path('carrito/',views.carrito,name='carrito'),
     path('signout/',views.signout, name='signout'),
     path('signin/',views.signin, name='signin'),
-    path('productos/',views.productos, name='productos'),
+    path('categoria/',views.categoria, name='categoria'),
+    path('categoria_intermedia/<int:categoria_id>/', views.categoria_intermedia, name='categoria_intermedia'),
+    path('productos_categoria_intermedia/<int:categoria_intermedia_id>/', views.productos_categoria_intermedia, name='productos_categoria_intermedia'),
 ]

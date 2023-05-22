@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
 from django.conf import settings
@@ -8,10 +8,19 @@ from django.contrib.auth import logout,authenticate,login
 from productos.models import productos,categoria_Intermedia,categorias
 # Create your views here.
 
-def productos(request):
+def categoria(request):
     categorias_list = categorias.objects.all()
-    
-    return render(request, 'productos.html', {'categorias_list': categorias_list})
+    return render(request, 'categoria.html', {'categorias_list': categorias_list})
+
+def categoria_intermedia(request, categoria_id):
+    categoria = categorias.objects.get(id=categoria_id)
+    categoria_intermedia_list = categoria_Intermedia.objects.filter(categoria=categoria)
+    return render(request, 'categoria_intermedia.html', {'categoria_intermedia_list': categoria_intermedia_list})
+
+def productos_categoria_intermedia(request, categoria_intermedia_id):
+    categoria_intermedia = categoria_Intermedia.objects.get(id=categoria_intermedia_id)
+    productos_list = productos.objects.filter(categoria_Intermedia=categoria_intermedia)
+    return render(request, 'productos_categoria_intermedia.html', {'productos_list': productos_list})
 
 def signup(request):
 
