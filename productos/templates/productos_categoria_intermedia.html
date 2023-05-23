@@ -2,17 +2,71 @@
 
 {% block content %}
 
+<head>
+    <style>
+        .producto {
+            display: flex;
+            align-items: center;
+            margin-bottom: 55px;
+          }
+          
+          .producto img {
+            height: 200px;
+            width: 200px;
+            margin-right: 45px; 
+          }
+          
+          .producto .producto-textos {
+            flex: 1 1 auto;
+          }
+          
+          .producto .producto-textos h3,
+          .producto .producto-textos p {
+            text-align: left;
+          }
+
+          h1{
+            text-align: center;
+            margin-bottom: 50px;
+          }
+
+          .Regresar {
+            font-size: 24px;
+            margin-top: 30px;
+            margin-left: 40px;
+            color: #333;
+            text-decoration: none;
+            border: 1px solid #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+          }
+          
+          .Regresar:hover {
+            background-color: #3131315a;
+            color: #fff;
+            text-decoration: none;
+          }
+    </style>
+</head>
+
+<h3 class="Regresar"><a href="/categoria">Regresar a Categorias</a></h3>
+
+<h1>Prodcuto</h1>
 {% for producto in productos_list %}
 <div class="producto">
-    <h3>{{ producto.nomProducto }}</h3>
-    <p>Marca: {{ producto.nomMarca }}</p>
-    <p>Precio: {{ producto.intprecio }}</p>
-    <a href="#">
-        <img src="{{ producto.foto }}" alt="Imagen del producto">
-    </a>
+    <img src="{{ producto.foto }}" alt="Imagen del producto">
+    <div class="producto-textos">
+        <h3>{{ producto.nomProducto }}</h3>
+        <p>Marca: {{ producto.nomMarca }}</p>
+        <p>Precio: {{ producto.intprecio }}</p>
+    </div>
 </div>
 {% empty %}
 <p>No hay productos disponibles para esta categoría intermedia.</p>
 {% endfor %}
+
+
 
 {% endblock %}

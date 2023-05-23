@@ -19,8 +19,9 @@ def categoria_intermedia(request, categoria_id):
 
 def productos_categoria_intermedia(request, categoria_intermedia_id):
     categoria_intermedia = categoria_Intermedia.objects.get(id=categoria_intermedia_id)
-    productos_list = productos.objects.filter(categoria_Intermedia=categoria_intermedia)
+    productos_list = productos.objects.filter(categoria_Intermedia=categoria_intermedia).order_by('intprecio')
     return render(request, 'productos_categoria_intermedia.html', {'productos_list': productos_list})
+
 
 def signup(request):
 

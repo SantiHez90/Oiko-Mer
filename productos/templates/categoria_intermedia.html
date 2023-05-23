@@ -6,18 +6,65 @@
 
         h1{
             text-align: center;
+            margin-bottom: 35px;
+            margin-top: 35px;
         }
 
-        .container{
+        p{
+            margin-top: 35px;
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+
+        .container {
             display: flex;
-        }
-        img{
-            width: 300px;
-        }
+            flex-wrap: wrap;
+          }
+          
+          .categoria-intermedia {
+            flex: 0 0 33.33%;
+            padding: 10px;
+            box-sizing: border-box;
+          }
+          
+          .categoria-intermedia h2 {
+            text-align: left;
+            font-size: 20px;
+          }
+          
+          .categoria-intermedia img {
+            display: block;
+            width: 200px; 
+            height: 200px; 
+            object-fit: cover;
+          }
+          .Regresar {
+            font-size: 24px;
+            margin-top: 30px;
+            margin-left: 40px;
+            color: #333;
+            text-decoration: none;
+            border: 1px solid #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+          }
+          
+          .Regresar:hover {
+            background-color: #3131315a;
+            color: #fff;
+            text-decoration: none;
+          }
+
     </style>
 </head>
 
-    {% for categoria_intermedia in categoria_intermedia_list %}
+<h3 class="Regresar"><a href="/categoria">Regresar a Categorias</a></h3>
+
+<h1>Lista de Productos</h1>
+    <div class="container">
+        {% for categoria_intermedia in categoria_intermedia_list %}
         <div class="categoria-intermedia">
             <h2>{{ categoria_intermedia.nomCategoria_Intermedia }}</h2>
             <a href="{% url 'productos_categoria_intermedia' categoria_intermedia.id %}">
@@ -27,5 +74,7 @@
     {% empty %}
         <p>No hay categorías intermedias disponibles para esta categoría.</p>
     {% endfor %}
+    </div>
+    
 
 {% endblock %}
