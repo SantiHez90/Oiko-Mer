@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.urls import path
 from productos import views
@@ -28,4 +29,5 @@ urlpatterns = [
     path('categoria/',views.categoria, name='categoria'),
     path('categoria_intermedia/<int:categoria_id>/', views.categoria_intermedia, name='categoria_intermedia'),
     path('productos_categoria_intermedia/<int:categoria_intermedia_id>/', views.productos_categoria_intermedia, name='productos_categoria_intermedia'),
+    path('reset_password/',auth_views.PasswordResetCompleteView.as_view())
 ]

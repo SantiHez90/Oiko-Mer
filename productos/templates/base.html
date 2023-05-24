@@ -19,6 +19,7 @@
     <style>
       @import url('https://fonts.cdnfonts.com/css/futura-pt');
       </style>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
   </head>
   <body>
     {% load static %}
@@ -51,19 +52,11 @@
               <a class="nav-link active" aria-current="page" href="/">Inicio</a>
             </li>
             
-
-            
-            
-
-            <!--Agregar a Auth-->    
+            <!--Ver pesataña si el usuario esta autenticado-->
+            {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="/categoria">Categorias</a>
             </li>
-
-
-            <!--Ver pesataña si el usuario esta autenticado-->
-            {% if user.is_authenticated %}
-            
             <li class="nav-item">
               <a class="nav-link" href="/signout">Cerrar sesion</a>
             </li>
@@ -75,11 +68,6 @@
               <a class="nav-link" href="/signin">Iniciar sesion</a>
             </li>
             {% endif %}
-            <!--Pestaña deshablilitada
-                <li class="nav-item">
-                <a class="nav-link disabled">Productos</a>
-              </li>
-              -->
           </ul>
         </div>
       </div>

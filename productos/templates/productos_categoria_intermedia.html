@@ -4,24 +4,24 @@
 
 <head>
     <style>
-        .producto {
+      #productoo {
             display: flex;
             align-items: center;
             margin-bottom: 55px;
           }
           
-          .producto img {
+          #producto img {
             height: 200px;
             width: 200px;
             margin-right: 45px; 
           }
           
-          .producto .producto-textos {
+          #producto .producto-textos {
             flex: 1 1 auto;
           }
           
-          .producto .producto-textos h3,
-          .producto .producto-textos p {
+          #producto .producto-textos h3,
+          #producto .producto-textos p {
             text-align: left;
           }
 
@@ -51,22 +51,78 @@
     </style>
 </head>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+
 <h3 class="Regresar"><a href="/categoria">Regresar a Categorias</a></h3>
 
 <h1>Prodcuto</h1>
-{% for producto in productos_list %}
-<div class="producto">
-    <img src="{{ producto.foto }}" alt="Imagen del producto">
-    <div class="producto-textos">
-        <h3>{{ producto.nomProducto }}</h3>
-        <p>Marca: {{ producto.nomMarca }}</p>
-        <p>Precio: {{ producto.intprecio }}</p>
+<div class="container">
+  <dir class="row">
+    {% for producto in productos_list %}
+    <div class="col-6" id="producto">
+        <img src="{{ producto.foto }}" alt="Imagen del producto">
+        <div class="producto-textos">
+            <h3>{{ producto.nomProducto }}</h3>
+            <p>Marca: {{ producto.nomMarca }}</p>
+            <p>Precio: {{ producto.intprecio }}</p>
+        </div>
     </div>
+    {% empty %}
+    <p>No hay productos disponibles para esta categoría intermedia.</p>
+    {% endfor %}
+    
+    
+  </dir>
 </div>
-{% empty %}
-<p>No hay productos disponibles para esta categoría intermedia.</p>
-{% endfor %}
 
+<div class="col-6">
 
+  <canvas id="myChart"></canvas>
 
+</div>
+<<script>
+  const ctx = document.getElementById('myChart').getContext('2d');
+
+  const labels = {{ labels|safe }};
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'My First Dataset',
+      data: {{ data|safe }},
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 205, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(201, 203, 207, 0.2)'
+      ],
+      borderColor: [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)',
+        'rgb(201, 203, 207)'
+      ],
+      borderWidth: 1
+    }]
+  };
+
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    },
+  };
+
+  new Chart(ctx, config);
+</script>
 {% endblock %}

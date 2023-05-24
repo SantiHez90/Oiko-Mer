@@ -18,9 +18,18 @@ def categoria_intermedia(request, categoria_id):
     return render(request, 'categoria_intermedia.html', {'categoria_intermedia_list': categoria_intermedia_list})
 
 def productos_categoria_intermedia(request, categoria_intermedia_id):
+
+    data = []
+    labels = []
+
+    queryset = productos.objects.order_by('intprecio'   )
+    for producto in queryset:
+        labels.append(producto.nomMarca)
+        data.append(producto.intprecio)
+
     categoria_intermedia = categoria_Intermedia.objects.get(id=categoria_intermedia_id)
     productos_list = productos.objects.filter(categoria_Intermedia=categoria_intermedia).order_by('intprecio')
-    return render(request, 'productos_categoria_intermedia.html', {'productos_list': productos_list})
+    return render(request, 'productos_categoria_intermedia.html', {'productos_list': productos_list, 'labels': labels, 'data': data})
 
 
 def signup(request):
@@ -35,16 +44,16 @@ def signup(request):
             email = request.POST['email']
             pass1 = request.POST['pass1']
             pass2 = request.POST['pass2']   
-        
-            myuser = User.objects.create_user(username,email,pass1)
-            myuser.first_name = fname
-            myuser.last_name = lname
 
-            myuser.save
-
-            messages.success(request, "Tu cuenta ha sido creada exitosamente")
-
-            return render(request,'signup.html')
+            if pass1 != pass2:
+                return HttpResponse("Las contraseñas no coinciden")
+            else:
+                myuser = User.objects.create_user(username,email,pass1)
+                myuser.first_name = fname
+                myuser.last_name = lname
+                myuser.save
+                messages.success(request, "Tu cuenta ha sido creada exitosamente")
+                return render(request,'signup.html')
     
 def carrito(request):
     return render(request,'carrito.html')
@@ -61,22 +70,17 @@ def signout(request):
 
 
 def signin(request):
-
     if request.method == 'GET':
         return render(request,'signin.html')
     else:
         if request.method =='POST':
             username = request.POST['username']
             pass1 = request.POST['pass1']
-
             user = authenticate(username=username, password=pass1)
-
         if user is not None:
             login(request, user)
             fname = user.first_name
-            return render(request,'carrito.html',{'fname' : fname})
-            
+            return render(request,'categoria.html',{'fname' : fname})
         else:
             messages.error(request, "Credenciales incorrectas")
             return redirect('signin')
-    return render(request,"signin.html")
