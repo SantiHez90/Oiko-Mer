@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import logout,authenticate,login
 from productos.models import productos,categoria_Intermedia,categorias
+import json
 # Create your views here.
 
 def categoria(request):
@@ -18,18 +19,23 @@ def categoria_intermedia(request, categoria_id):
     return render(request, 'categoria_intermedia.html', {'categoria_intermedia_list': categoria_intermedia_list})
 
 def productos_categoria_intermedia(request, categoria_intermedia_id):
-
-    data = []
+    categoria_intermedia = categoria_Intermedia.objects.get(id=categoria_intermedia_id)
+    productos_list = productos.objects.filter(categoria_Intermedia=categoria_intermedia).order_by('intprecio')
     labels = []
+    data = []
 
-    queryset = productos.objects.order_by('intprecio'   )
-    for producto in queryset:
+    for producto in productos_list:
         labels.append(producto.nomMarca)
         data.append(producto.intprecio)
 
-    categoria_intermedia = categoria_Intermedia.objects.get(id=categoria_intermedia_id)
-    productos_list = productos.objects.filter(categoria_Intermedia=categoria_intermedia).order_by('intprecio')
-    return render(request, 'productos_categoria_intermedia.html', {'productos_list': productos_list, 'labels': labels, 'data': data})
+    data = [float(d) for d in data] 
+    context = {
+    'productos_list': productos_list,
+    'labels': json.dumps(labels),  # Convertir a cadena JSON para pasarlo al JavaScript
+    'data': json.dumps(data),  # Convertir a cadena JSON para pasarlo al JavaScript
+}
+    return render(request, 'productos_categoria_intermedia.html', context)
+
 
 
 def signup(request):
