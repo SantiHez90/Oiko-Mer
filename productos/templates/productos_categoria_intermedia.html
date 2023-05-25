@@ -9,24 +9,20 @@
             align-items: center;
             margin-bottom: 55px;
           }
-          
           #producto img {
             height: 200px;
             width: 200px;
             margin-right: 45px; 
           }
-          
           #producto .producto-textos {
             flex: 1 1 auto;
           }
-          
           #producto .producto-textos h3{
             font-size: 20px;
           }
           #producto .producto-textos p {
             text-align: left;
           }
-
           h1{
             text-align: center;
             margin-bottom: 50px;
@@ -36,88 +32,77 @@
             font-size: 18px;
             margin-top: 30px;
             margin-left: 40px;
-            color: #333;
-            text-decoration: none;
-            border: 1px solid #333;
+            
             padding: 10px 20px;
             border-radius: 5px;
             display: inline-block;
             transition: background-color 0.3s ease;
+            background-color: white;
+            border-radius:4px;
           }
           
           .Regresar:hover {
-            background-color: #3131315a;
+            background-color: #b3d1ff;
             color: #fff;
-            text-decoration: none;
           }
 
-          .container{
-            display: grid;
-          }
-
-          .column {
-            float: left;
-            width: 50%;
-            padding: 10px;
-            height: 300px; /* Should be removed. Only for demonstration */
+          .card{
+            margin-left: 16px;
+            margin-right: 16px;
+            margin-top: 16px;
+            margin-bottom: 16px;
           }
           
-          /* Clear floats after the columns */
-          .row:after {
-            content: "";
-            display: table;
-            clear: both;
+          .Grafica {
+            display: flex;
+            align-items: center;
+            justify-content: center; 
           }
     </style>
     
 </head>
 
-<h3 class="Regresar"><a href="/categoria">Regresar a Categorias</a></h3>
+<h3 class="Regresar"><a href="/categoria">&#60-Regresar a Categorias</a></h3>
 
-<h1>Prodcuto</h1>
+<h1 style="font-family: 'Raleway', sans-serif; margin-top:15px;">Producto</h1>
+
+
 <div class="container">
-  <dir class="row">
-    
-    <div class="column" id="producto">
-      <div class="producto-textos">
-      {% for producto in productos_list %}
-        <img src="{{ producto.foto }}" alt="Imagen del producto">
-        
-            <h3>{{ producto.nomProducto }}</h3>
-            <p>Marca: {{ producto.nomMarca }}</p>
-            <p>Precio: {{ producto.intprecio }}</p>
-            {% empty %}
-            <p>No hay productos disponibles para esta categoría intermedia.</p>
-        {% endfor %}
+  <div class="row">
+    {% for producto in productos_list %}
+    <div class="card" style="width: 18rem;">
+      <img src="{{ producto.foto }}" class="card-img-top" alt="Producto">
+      <div class="card-body">
+        <h5 class="card-title">{{ producto.nomProducto }}</h5>
+        <p class="card-text">Marca: {{ producto.nomMarca }}<br> Precio: {{ producto.intprecio }}</p>
       </div>
     </div>
-    
+    {% empty %}
+    <p>No hay productos disponibles para esta categoría intermedia.</p>
+    {% endfor %}
+  </div>
+  <div class="row">
+    <h1 style="font-family: 'Raleway', sans-serif; margin-top:15px;"> Grafico de Productos</h1>
     <!-- Grafico-->
-    <div class="column">
+    <div class="Grafica">
       <canvas id="chartId" aria-label="chart" height="350" width="580"></canvas>
       <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/helpers.esm.min.js"></script>
     </div>
     
-  </dir>
+  </div>
 </div>
+    
+    
+
+
+            
 
 
 
-
-      
 
 
 <script>
-  //Forma 1
-  // const nombresV = {{ labels | safe }};
-  // onst ValorV = {{ data | safe }};
-  //Forma 2
-  //[{% for producto in productos_list %} '{{ producto.nomMarca }}',{% endfor %}],
-  //[{% for producto in productos_list %} {{ producto.intprecio }},{% endfor %}],
-
-  // jquery function
-
 var chrt = document.getElementById("chartId").getContext("2d");
 var chartId = new Chart(chrt, {
 
@@ -130,11 +115,14 @@ var chartId = new Chart(chrt, {
                borderWidth: 2,
             }],
          },
+         backgroundColor: [
+         'rgba(255, 99, 132, 0.2)',
+         'rgba(75, 192, 192, 0.2)',
+         'rgba(75, 192, 192, 0.2)',
+         'rgba(75, 192, 192, 0.2)'],
          options: {
             responsive: false,
          },
       });
-
 </script>
-
 {% endblock %}

@@ -39,42 +39,56 @@
             object-fit: cover;
           }
           .Regresar {
-            font-size: 24px;
+            font-size: 18px;
             margin-top: 30px;
             margin-left: 40px;
-            color: #333;
-            text-decoration: none;
-            border: 1px solid #333;
+            
             padding: 10px 20px;
             border-radius: 5px;
             display: inline-block;
             transition: background-color 0.3s ease;
+            background-color: white;
+            border-radius:4px;
           }
           
           .Regresar:hover {
-            background-color: #3131315a;
+            background-color: #b3d1ff;
             color: #fff;
-            text-decoration: none;
+          }
+
+          #imagen-categoria{
+            width:330xp !important;
+            height:330xp !important;
+          }
+          
+          .card{
+            margin-left: 16px;
+            margin-right: 16px;
+            margin-top: 16px;
+            margin-bottom: 16px;
           }
 
     </style>
 </head>
 
-<h3 class="Regresar"><a href="/categoria">Regresar a Categorias</a></h3>
+<h3 class="Regresar"><a href="/categoria">&#60-Regresar a Categorias</a></h3>
 
-<h1>Lista de Productos</h1>
+<h1 style="font-family: 'Raleway', sans-serif; margin-top:15px;">Lista de Productos</h1>
+  
     <div class="container">
+      <div class="row">
         {% for categoria_intermedia in categoria_intermedia_list %}
-        <div class="categoria-intermedia">
-            <h2>{{ categoria_intermedia.nomCategoria_Intermedia }}</h2>
-            <a href="{% url 'productos_categoria_intermedia' categoria_intermedia.id %}">
-                <img src="{{ categoria_intermedia.foto }}" alt="Imagen de la categoría intermedia">
-            </a>
+        <div class="card" style="width: 25rem;">
+          <h5 class="card-title" style="text-align:center;margin-top:4px;margin-bottom:4px;">{{ categoria_intermedia.nomCategoria_Intermedia }}</h5>
+          <a href="{% url 'productos_categoria_intermedia' categoria_intermedia.id %}" style="margin-top:4px;margin-bottom:4px;">
+              <img src="{{ categoria_intermedia.foto }}" class="card-img-top" alt="Producto" id="imagen-categoria">
+          </a> 
+          
         </div>
-    {% empty %}
-        <p>No hay categorías intermedias disponibles para esta categoría.</p>
-    {% endfor %}
+        {% empty %}
+        <p>No hay productos disponibles para esta categoría intermedia.</p>
+        {% endfor %}
+      </div>
     </div>
-    
 
 {% endblock %}

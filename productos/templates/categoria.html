@@ -14,9 +14,11 @@
             margin-right: 20%;
         }
 
-        .container {
-            display: flex;
-            flex-wrap: wrap;
+        .card{
+            margin-left: 16px;
+            margin-right: 16px;
+            margin-top: 16px;
+            margin-bottom: 16px;
           }
           
           .productos {
@@ -29,12 +31,12 @@
             text-align: left;
           }
           
-          .productos img {
-            display: block;
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
+          #imagen-categoria{
+            width:330xp !important;
+            height:330xp !important;
+            
           }
+        
           
 
     </style>
@@ -42,21 +44,24 @@
 
 
 {% if user.is_authenticated %}  
-    <h1>Lista de Categorías</h1>
+    <h1 style="font-family: 'Raleway', sans-serif; margin-top:15px;">Lista de Categorías</h1>
 
-    <p>¡Bienvenido/a a nuestra página de lista de categorías de productos! Aquí encontrarás una amplia variedad de productos cuidadosamente seleccionados para satisfacer todas tus necesidades. Explora nuestras categorías y descubre una gama de artículos de alta calidad que te encantarán.</p>
-        <div class="container">
-
-            {% for categoria in categorias_list %}
-                <div class="productos">
-                    <h2>{{ categoria.nomCategoria }}</h2>
-                    <a href="{% url 'categoria_intermedia' categoria.id %}">
-                    <img src="{{ categoria.imagen }}" alt="Imagen de la categoría">
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
+    <p style="font-size: 18px;">¡Bienvenido/a a nuestra página de lista de categorías de productos! Aquí encontrarás una amplia variedad de productos cuidadosamente seleccionados para satisfacer todas tus necesidades. Explora nuestras categorías y descubre una gama de artículos de alta calidad que te encantarán.</p>
         
-
+        <div class="container">
+            <div class="row">
+            {% for categoria in categorias_list %}
+              <div class="card" style="width: 25rem;">
+                <h5 class="card-title" style="text-align:center;margin-top:4px;margin-bottom:4px;">{{ categoria.nomCategoria }}</h5>
+                <a href="{% url 'categoria_intermedia' categoria.id %}" style="margin-top:4px;margin-bottom:4px;">
+                    <img src="{{ categoria.imagen }}" class="card-img-top" alt="Producto" id="imagen-categoria">
+                </a> 
+                
+              </div>
+              {% empty %}
+              <p>No hay productos disponibles para esta categoría intermedia.</p>
+              {% endfor %}
+            </div>
+          </div>
 {% endif %}
 {% endblock %}

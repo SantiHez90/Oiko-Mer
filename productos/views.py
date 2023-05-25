@@ -7,9 +7,11 @@ from django.contrib import messages
 from django.contrib.auth import logout,authenticate,login
 from productos.models import productos,categoria_Intermedia,categorias
 import json
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def categoria(request):
+    
     categorias_list = categorias.objects.all()
     return render(request, 'categoria.html', {'categorias_list': categorias_list})
 
@@ -76,17 +78,17 @@ def signout(request):
 
 
 def signin(request):
-    if request.method == 'GET':
-        return render(request,'signin.html')
-    else:
-        if request.method =='POST':
-            username = request.POST['username']
-            pass1 = request.POST['pass1']
-            user = authenticate(username=username, password=pass1)
-        if user is not None:
-            login(request, user)
-            fname = user.first_name
-            return render(request,'categoria.html',{'fname' : fname})
+        if request.method == 'GET':
+            return render(request,'signin.html')
         else:
-            messages.error(request, "Credenciales incorrectas")
-            return redirect('signin')
+            if request.method =='POST':
+                username = request.POST['username']
+                pass1 = request.POST['pass1']
+                user = authenticate(username=username, password=pass1)
+            if user is not None:
+                login(request, user)
+                fname = user.first_name
+                return render(request,'home.html',{'fname' : fname})
+            else:
+                messages.error(request, "Credenciales incorrectas")
+                return redirect('signin')
