@@ -91,4 +91,4 @@ def signin(request):
                 return render(request,'home.html',{'fname' : fname})
             else:
                 messages.error(request, "Credenciales incorrectas")
-                return redirect('signin')
+                return redirect('home')
